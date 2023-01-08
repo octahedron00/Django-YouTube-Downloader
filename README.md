@@ -56,4 +56,4 @@ Providing a link to the downloader page, not necessary.
 
 **Download Audios from a Playlist(/dal/)** : works same, but for a playlist, and only audios.
 
-**YouTube downloading code is same as [This Code](github.com/octahedron00/YouTube-Playlist-Downloader)**
+**YouTube downloading code is same as [This Code](www.github.com/octahedron00/YouTube-Playlist-Downloader)**
