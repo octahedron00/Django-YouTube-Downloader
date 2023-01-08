@@ -1,6 +1,8 @@
 # Django-YouTube-Downloader
 
-YouTube &amp; Playlist Downloading Webpage Source Code, Based on Django, FFmpeg and pytube.
+**YouTube &amp; Playlist Downloading Webpage Source Code.**
+
+Based on **Django, FFmpeg and pytube.**
 
 # Metadata of the Django Project
 
