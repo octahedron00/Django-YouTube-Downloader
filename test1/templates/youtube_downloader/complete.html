@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download Finished!</title>
+</head>
+<body>
+
+<h1>Download is now on the way!</h1>
+
+<script type="text/javascript">
+    async function nothing(){
+        return;
+    }
+
+    window.onload = function() {
+
+        file_addresses = {{ file_addresses_json|safe }};
+
+        i = 0;
+
+        function checkFlag() {
+            if(!(downloader == null || downloader.closed)) {
+                console.log("downloader working...");
+                window.setTimeout(checkFlag, 500);
+            } else {
+                console.log("downloader is over");
+                console.log("delete " + file_addresses[i]);
+                window.open('./../delete/' + file_addresses[i]);
+
+                i += 1;
+                window.setTimeout(iterate, 500);
+            }
+        }
+
+        function iterate(){
+            if(i < file_addresses.length) {
+                console.log("downloader working..." + i);
+                downloader = window.open('./../download/' + file_addresses[i]);
+                console.log(file_addresses[i]);
+                window.setTimeout(checkFlag, 500);
+            }
+        }
+
+        iterate();
+    }
+</script>
+
+<a href="../"><h3>Here to Convert Other Videos</h3></a>
+
+</body>
+</html>

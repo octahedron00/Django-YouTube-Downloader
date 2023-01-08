@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Insert Links</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script type="text/javascript">
+        function hide_download(){
+            document.getElementById("button_download").style.display = "none";
+            document.getElementById("loading_download").style.display = "block";
+        }
+    </script>
+
+</head>
+<body>
+<h1>Download an Audio</h1>
+
+
+{% if error|length > 0 %}
+<div class="errorbox">
+    {{ error }}
+</div>
+{% endif %}
+
+<form action="" method="post">
+
+    {% csrf_token %}
+
+    <div class="box">
+        <h2>1. Insert YouTube Link</h2>
+        {{ form.text_link }}
+    </div>
+
+    <div class="box">
+        <h2>2. Set Encodings in MP3</h2>
+        {% for radio in form.radio_encoding_to_mp3 %}
+        {{ radio }}<br>
+        {% endfor %}
+    </div>
+
+    <div class="box">
+        <h2>3. Set Channel Name Addition</h2>
+        {% for radio in form.radio_add_channel %}
+        {{ radio }}<br>
+        {% endfor %}
+    </div>
+    <input id="button_download" type="submit" value="Download Now" onclick="hide_download();">
+    <h2 id="loading_download" style="display: none">   Downloading... Please Wait</h2>
+</form>
+
+</body>
+</html>
+
+

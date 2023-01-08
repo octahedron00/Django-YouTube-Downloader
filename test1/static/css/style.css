@@ -1,0 +1,17 @@
+
+.box {
+    margin: 5px;
+    padding: 5px 10px 15px 10px;
+    border: 3px solid black;
+}
+
+.errorbox {
+    margin: 5px;
+    padding: 5px 10px 15px 10px;
+    border: 3px solid red;
+}
+
+#id_text_link {
+    width: 500px;
+    height: 20px;
+}
