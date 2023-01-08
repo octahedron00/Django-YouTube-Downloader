@@ -38,22 +38,22 @@ Providing a link to the downloader page, not necessary.
 
 ## youtube_downloader
 
-Main Page(/) : Providing links to 4 downloading options. (Video/Audio), (One link/Playlist)
+**Main Page(/)** : Providing links to 4 downloading options. (Video/Audio), (One link/Playlist)
 
-Download a Video(/dv/) : receiving about the link and the settings.
+**Download a Video(/dv/)** : receiving about the link and the settings.
 
 > Download pages, after receiving the link and settings, self-check whether the link is valid or not, 
 > 
 > and if the link is not valid, they simply show error messages.
 > 
-> If the link is valid -> they show new pages(without any change of link), which automatically open pages to download a video, 
+> If the link is valid -> **they show new pages(without any change of link)**, which **automatically open pages to download a video**, 
 >
-> and to delete that video from the server-side(to save the storage capacity).
+> and **to delete that video from the server-side(to save the storage capacity).**
 
-Download Videos from a Playlist(/dvl/) : works same, but for a playlist.
+**Download Videos from a Playlist(/dvl/)** : works same, but for a playlist.
 
-Download an Audio(/da/) : works same, but it downloads only an audio.
+**Download an Audio(/da/)** : works same, but it downloads only an audio.
 
-Download Audios from a Playlist(/dal/) : works same, but for a playlist, and only audios.
+**Download Audios from a Playlist(/dal/)** : works same, but for a playlist, and only audios.
 
 **YouTube downloading code is same as [This Code](github.com/octahedron00/YouTube-Playlist-Downloader)**
