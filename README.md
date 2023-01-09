@@ -14,15 +14,27 @@ Based on **Django, FFmpeg and pytube.**
 
 **index** (for index page)
 
-**youtube-downloader** (for YouTube Downloader page)
+**new** (for allow popup before downloading, do not mind about the name; it was just a test page)
 
-*new* (not used, it was just for test)
+**youtube-downloader** (for YouTube Downloader page)
 
 ## folder
 
 **static** (just for style.css here)
 
 **template** (for the html files, js script is included in html)
+
+## used database
+
+**Database : SQLite**, which is pre-installed in django.
+
+**Model : DownloadedFile**
+
+> id : Int, added by django automatically.
+>
+> address : CharField(max-length = 1000), stores the encrypted address of the file.
+>
+> created_time : DateTimeField(allow_now_add = True), stores the created time of the file.
 
 ## used package
 
@@ -36,11 +48,23 @@ Based on **Django, FFmpeg and pytube.**
 
 ## index
 
-Providing a link to the downloader page, not necessary.
+Providing a link to the downloader page(via the 'new' page), not necessary.
+
+## new
+
+Because the downloading uses a popup view(I can't find any way for multiple-file download from server without this),
+
+this page will open youtube_downloader by using a popup, so the users can allow popup before downloading.
 
 ## youtube_downloader
 
 **Main Page(/)** : Providing links to 4 downloading options. (Video/Audio), (One link/Playlist)
+
+> If some files for download(send from server) are left behind(for more than 3 hours),
+>
+> by checking the database of files and their created time,
+>
+> loading this page also deletes those files.
 
 **Download a Video(/dv/)** : receiving about the link and the settings.
 
@@ -51,6 +75,8 @@ Providing a link to the downloader page, not necessary.
 > If the link is valid -> **they show new pages(without any change of link)**, which **automatically open pages to download a video**, 
 >
 > and **to delete that video from the server-side(to save the storage capacity).**
+>
+> Also, those add the information of files to database.
 
 **Download Videos from a Playlist(/dvl/)** : works same, but for a playlist.
 
