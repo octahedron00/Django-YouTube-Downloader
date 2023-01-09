@@ -12,6 +12,7 @@ from cryptography.fernet import Fernet
 
 from .forms import DownloadVideoForm, DownloadAudioForm
 from .download import *
+from .models import DownloadedFile
 
 # Create your views here.
 
@@ -36,13 +37,44 @@ def delete_file(request, download_address: str):
     f = Fernet(KEY)
     file_address = str(f.decrypt(bytes(download_address, encoding='utf-8')).decode('utf-8'))
 
+    file_list = DownloadedFile.objects.get(address=download_address)
+
+    print("delete file, name is", file_list)
+    try:
+        file = file_list[0]
+        file.delete()
+    except:
+        pass
+
     print("DELETE:", file_address)
 
     os.remove(file_address)
     return render(request, 'youtube_downloader/null.html')
 
 
+def save_file(download_addresses: list):
+
+    for file_address in download_addresses:
+        file = DownloadedFile(address=file_address)
+        file.save()
+
+
+def clear_file():
+    file_list = DownloadedFile.objects.all()
+
+    print(file_list)
+
+    for file in file_list:
+        if not file.is_valid():
+            f = Fernet(KEY)
+
+            file_address = str(f.decrypt(bytes(str(file.address), encoding='utf-8')).decode('utf-8'))
+            os.remove(file_address)
+            file.delete()
+
+
 def index(request: HttpRequest):
+    clear_file()
     return render(request, 'youtube_downloader/index.html')
 
 
@@ -72,6 +104,8 @@ def download_video_list(request: HttpRequest):
 
                 download_address = [f.encrypt(bytes(file_address, encoding='utf-8')).decode('utf-8') for file_address in file_address_list]
                 print(download_address)
+                save_file(download_address)
+
                 context = {
                     'file_addresses': download_address,
                     'file_addresses_json': json.dumps(download_address)
@@ -114,6 +148,8 @@ def download_video(request: HttpRequest):
 
                 download_address = [f.encrypt(bytes(file_address, encoding='utf-8')).decode('utf-8')]
                 print(download_address)
+                save_file(download_address)
+
                 context = {
                     'file_addresses': download_address,
                     'file_addresses_json': json.dumps(download_address)
@@ -160,6 +196,8 @@ def download_audio_list(request: HttpRequest):
                 download_address = [f.encrypt(bytes(file_address, encoding='utf-8')).decode('utf-8') for file_address in
                                     file_address_list]
                 print(download_address)
+                save_file(download_address)
+
                 context = {
                     'file_addresses': download_address,
                     'file_addresses_json': json.dumps(download_address)
@@ -203,6 +241,9 @@ def download_audio(request: HttpRequest):
 
                 download_address = [f.encrypt(bytes(file_address, encoding='utf-8')).decode('utf-8')]
                 print(download_address)
+
+                save_file(download_address)
+
                 context = {
                     'file_addresses': download_address,
                     'file_addresses_json': json.dumps(download_address)

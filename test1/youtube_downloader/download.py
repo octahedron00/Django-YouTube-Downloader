@@ -10,7 +10,7 @@ download_path = "C:\\Python\\youtube\\download"
 def get_video(link: str, is_1080: bool = False, add_channel: bool = True):
     # Downloading
     # use_oauth : for download YouTube_Music-only, if you have YouTube Music account.
-    yt = YouTube(link, use_oauth=True)
+    yt = YouTube(link)
 
     timestamp = str(datetime.datetime.now())[-6:]
 
@@ -50,6 +50,7 @@ def get_video(link: str, is_1080: bool = False, add_channel: bool = True):
                          shell=True, capture_output=True).stdout)
     os.remove(filename + "_.mp3")
     os.remove(filename + "_.mp4")
+
     return f'{filename}.mp4'
 
 
